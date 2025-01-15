@@ -36,6 +36,19 @@ post '/visit' do
 		return erb :visit
 	end
 
+	if @phone == ''
+		@error = 'Введите ваш номер телефона'
+		return erb :visit
+	end
+
+	if @datetime == ''
+		@error = 'Неправильная дата и время'
+		return erb :visit
+	end
+
+	if @error != ''
+		return erb :visit
+	end
 
 	f = File.open './public/users.txt', 'a'
 	f.write "Имя: #{@username}, Телефон: #{@phone}, Дата и время: #{@datetime}, Парикмахер: #{@barber}, Цвет: #{@color} "
